@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hundeparken Backpack</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/bulldog.ico">
+</head>
+<body>
+    <div class="container">
+        <div class="button-container">
+            <button onclick="hideThings('head')">Hide head hats</button>
+            <button onclick="hideThings('belly')">Hide belly hats</button>
+            <button onclick="hideThings('mouth')">Hide mouth hats</button>
+            <button onclick="hideThings('object')">Hide objects</button>
+        </div>
+        <div>
+            <input type="text" id="search-bar" placeholder="Search hat by name...">
+        </div>
+        <div id="list-container"></div>
+        <div class="textbox">
+            <p>The images seen in this application are fetched from 
+                <a href="https://hundeparken.net/">Hundeparken</a>&lt;3. I do not own the rights to them
+            </p>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
