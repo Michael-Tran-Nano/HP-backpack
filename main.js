@@ -6,7 +6,13 @@ console.log("Person til at gøre hjemmesiden pænere søges");
 
 window.hideThings = hideThings;
 
-window.searchText = null;
+window.searchText = "";
+window.shown = {
+	head: true,
+	belly: true,
+	mouth: true,
+	object: true,
+};
 
 document.addEventListener("DOMContentLoaded", async function () {
 	window.data = await setup.getHatData();
@@ -19,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 function handleSearch(event) {
 	const searchText = event.target.value.toLowerCase();
 	window.searchText = searchText;
-	const listItems = document.querySelectorAll(".list-item");
+	list.updateList();
 
 	// // A litte surprise
 	// if (searchQuery == "unlock objects") {
@@ -29,27 +35,14 @@ function handleSearch(event) {
 	// 	skipObjects = true;
 	// 	list.populateList(window.data, handleClick);
 	// }
-
-	listItems.forEach((item) => {
-		const name = item.querySelector(".item-name").textContent.toLowerCase();
-		if (name.includes(searchText)) {
-			item.style.display = "flex";
-		} else {
-			item.style.display = "none";
-		}
-	});
 }
 
 function hideThings(thing) {
-	const listItems = document.querySelectorAll(".list-item");
-	listItems.forEach((item) => {
-		const placement = item.getAttribute("placement");
-		if (placement === thing) {
-			item.style.display = "none";
-		} else {
-			item.style.display = "flex";
-		}
-	});
+	window.shown[thing] = !window.shown[thing]; // make a thing to change the text
+	const element = document.getElementById(`button-${thing}`);
+	element.textContent = window.shown[thing] ? `Hide ${thing}` : `Show ${thing}`;
+
+	list.updateList();
 }
 
 function handleClick(hat_id) {

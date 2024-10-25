@@ -16,7 +16,7 @@ export function populateList(data, handleClick) {
 		listItem.className = "list-item";
 		listItem.addEventListener("click", () => handleClick(item.key));
 		listItem.id = item.key;
-		listItem.setAttribute("placement", getPlacementFromNumber(item.u));
+		listItem.setAttribute("data-placement", getPlacementFromNumber(item.u));
 
 		// Type icon
 		const placement = getPlacementFromNumber(item.u);
@@ -53,4 +53,18 @@ export function getPlacementFromNumber(u) {
 		return id.object;
 	}
 	return id.belly;
+}
+
+export function updateList() {
+	const listItems = document.querySelectorAll(".list-item");
+	listItems.forEach((item) => {
+		const placement = item.dataset.placement;
+		const name = item.querySelector(".item-name").textContent.toLowerCase();
+
+		if (name.includes(window.searchText) && window.shown[placement]) {
+			item.style.display = "flex";
+		} else {
+			item.style.display = "none";
+		}
+	});
 }
